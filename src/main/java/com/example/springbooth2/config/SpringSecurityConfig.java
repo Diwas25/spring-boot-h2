@@ -22,8 +22,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/employees").permitAll() // Allow anyone to post the JSON data
-                .anyRequest().authenticated()
+                .antMatchers("/api/**").authenticated()
                 .and()
                 .httpBasic();
     }

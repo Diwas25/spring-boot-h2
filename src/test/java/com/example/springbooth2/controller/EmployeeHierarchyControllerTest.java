@@ -33,37 +33,30 @@ public class EmployeeHierarchyControllerTest {
 
     @Test
     public void testPostEmployeeHierarchy() throws Exception {
-        // Mock the behavior of employeeHierarchyService.saveEmployeeHierarchy()
         doNothing().when(employeeHierarchyService).saveEmployeeHierarchy(anyMap());
 
-        // Prepare the request body
         Map<String, String> hierarchy = new HashMap<>();
         hierarchy.put("Pete", "Nick");
         hierarchy.put("Barbara", "Nick");
 
-        // Perform the POST request
         mockMvc.perform(post("/api/employees")
                         .header("Authorization", "Basic dXNlcm5hbWU6cGFzc3dvcmQ=")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(hierarchy)))
                 .andExpect(status().isOk());
 
-        // Verify that employeeHierarchyService.saveEmployeeHierarchy() was called
         verify(employeeHierarchyService, times(1)).saveEmployeeHierarchy(hierarchy);
     }
 
     @Test
     public void testGetSupervisorAndSupervisorSupervisor() throws Exception {
-        // Mock the behavior of employeeHierarchyService.getSupervisorHierarchy()
         when(employeeHierarchyService.getSupervisorHierarchy(anyString())).thenReturn("Supervisor");
 
-        // Perform the GET request with the authorization header
         mockMvc.perform(get("/api/supervisor/{employeeName}", "John")
                         .header("Authorization", "Basic dXNlcm5hbWU6cGFzc3dvcmQ="))
                 .andExpect(status().isOk())
                 .andExpect(content().string("Supervisor"));
 
-        // Verify that employeeHierarchyService.getSupervisorHierarchy() was called
         verify(employeeHierarchyService, times(1)).getSupervisorHierarchy("John");
     }
 
@@ -72,6 +65,6 @@ public class EmployeeHierarchyControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/getMsg")
                         .header("Authorization", "Basic dXNlcm5hbWU6cGFzc3dvcmQ="))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Spring Security Example"));
+                .andExpect(MockMvcResultMatchers.content().string("Spring Security & H2 DB Example"));
     }
 }

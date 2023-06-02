@@ -29,7 +29,7 @@ public class EmployeeHierarchyController {
 
     @GetMapping("/getMsg")
     public String getMsg(){
-        return "Spring Security Example";
+        return "Spring Security & H2 DB Example";
     }
 }
 

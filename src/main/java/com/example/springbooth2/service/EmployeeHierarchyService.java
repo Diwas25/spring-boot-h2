@@ -33,7 +33,7 @@ public class EmployeeHierarchyService {
                 return "Supervisor: " + supervisor.getName() + ", Supervisor's Supervisor: " + supervisorSupervisor.getName();
             }
         }
-        return "Employee not found";
+        return "Employee such not found";
     }
 }
 

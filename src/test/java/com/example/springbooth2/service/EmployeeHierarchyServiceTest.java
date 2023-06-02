@@ -60,12 +60,11 @@ public class EmployeeHierarchyServiceTest {
     @Test
     public void testGetSupervisorHierarchy_employeeNotFound() {
         String employeeName = "John";
-
         when(employeeRepository.findByName(employeeName)).thenReturn(null);
 
         String result = employeeHierarchyService.getSupervisorHierarchy(employeeName);
 
-        assertEquals("Employee not found", result);
+        assertEquals("Employee such not found", result);
     }
 }
 
